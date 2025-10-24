@@ -34,13 +34,14 @@ Route::get('/users/{username}/profile/{id?}', function ($username, $id=null) {
 //     );
 // });
 
-Route::get('/about', [TraineeController::class, 'index']);
+Route::get('/trainees', [TraineeController::class, 'index']);
+Route::get('/trainees/{id}', [TraineeController::class, 'show']);
 
 
-Route::get('/trainees/{id}/', function ( $id, ) {  
+// Route::get('/trainees/{id}/', function ( $id, ) {  
 
 
     
-    return view('pages.trainees.show',
-    ["trainee"=>Trainee::findTrainee($id)]   );
-});
+//     return view('pages.trainees.show',
+//     ["trainee"=>Trainee::findTrainee($id)]   );
+// });

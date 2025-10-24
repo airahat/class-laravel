@@ -3,10 +3,10 @@
 
 @section("content")
     <h1>Trainee Details</h1>
-    <p>ID: {{ $trainee['id'] }}</p>
-    <p>Name: {{ $trainee['name'] }}</p>
-    <p>Email: {{ $trainee['email'] }}</p>
-    <p>Department: {{ $trainee['department'] }}</p>
-    <p>Status: {{ $trainee['is_active'] ? 'Active' : 'Inactive' }}</p>
+    <p>ID: {{ $trainees['id'] }}</p>
+    <p>Name: {{ $trainees['name'] }}</p>
+    <p>Email: {{ $trainees['email'] }}</p>
+    <p>Department: {{ $trainees['department'] }}</p>
+    <p>Status: {{ $trainees['is_active'] ? 'Active' : 'Inactive' }}</p>
 
 @endsection
