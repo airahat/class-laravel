@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Trainee;
 use App\Http\Controllers\TraineeController;
+use App\Http\Controllers\RolesController;
 
 Route::get('/', function () {
     return view('pages.welcome');
@@ -34,8 +35,11 @@ Route::get('/users/{username}/profile/{id?}', function ($username, $id=null) {
 //     );
 // });
 
-Route::get('/trainees', [TraineeController::class, 'index']);
-Route::get('/trainees/{id}', [TraineeController::class, 'show']);
+Route::get('/trainees', [TraineeController::class, 'index'])->name("trainees.index");
+Route::get('/trainees/{id}', [TraineeController::class, 'show'])->name("trainees.show");
+
+Route::get('/roles', [RolesController::class, 'index'])->name("roles.index");
+Route::get('/roles/{id}', [RolesController::class, 'show'])->name("roles.show");
 
 
 // Route::get('/trainees/{id}/', function ( $id, ) {  
