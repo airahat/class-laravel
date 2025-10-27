@@ -5,16 +5,17 @@ use App\Models\Trainee;
 use App\Http\Controllers\TraineeController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
-    return view('pages.welcome');
+    return view('admin.pages.welcome');
 });
 // Route::get('/about', function () {
 //     return view('pages.about');
 // });
 
 Route::get('/contact', function () {
-    return view('pages.contact',
+    return view('admin.pages.contact',
 [
     "name" => "Rahat",
     "email" => "rahat@example.com",
@@ -26,7 +27,7 @@ Route::get('/contact', function () {
 });
 
 Route::get('/users/{username}/profile/{id?}', function ($username, $id=null) {  
-    return view('pages.users', ["user" => $username, "id" => $id]);
+    return view('admin.pages.users', ["user" => $username, "id" => $id]);
 });
 // Route::get('/trainees', function () {
 
@@ -42,8 +43,8 @@ Route::get('/trainees/{id}', [TraineeController::class, 'show'])->name("trainees
 Route::get('/roles', [RolesController::class, 'index'])->name("roles.index");
 Route::get('/roles/{id}', [RolesController::class, 'show'])->name("roles.show");
 Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/{id}', [UserController::class, 'show'])->name("users.show");;
-
+Route::get('/users/{id}', [UserController::class, 'show'])->name("users.show");
+Route::get("/products", [ProductController::class, "index"]);
 
 // Route::get('/trainees/{id}/', function ( $id, ) {  
 

@@ -8,5 +8,4 @@ class Roles extends Model
 {
     protected $table = "roles";
 
-
 }
