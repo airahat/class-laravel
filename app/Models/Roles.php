@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Roles extends Model
 {
-    protected $table = "ecom_roles";
+    protected $table = "roles";
 
 
 }
