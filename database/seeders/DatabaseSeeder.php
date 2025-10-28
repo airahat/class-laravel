@@ -13,10 +13,10 @@ class DatabaseSeeder extends Seeder
     {
         
         // $this->call(RolesTableSeeder::class);
-            $this->call([
-        ProductSeeder::class,
-    ]);
-        // User::factory(30)->create();
+    //         $this->call([
+    //     ProductSeeder::class,
+    // ]);
+        User::factory(30)->create();
         // Product::factory(50)->create();
 
         // User::factory()->create([

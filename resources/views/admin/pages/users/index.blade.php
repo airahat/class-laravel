@@ -39,7 +39,7 @@
 
     @foreach ($users as $i => $user)
         <tr>
-            <td>{{ $i +1 }}</td>
+            <td>{{ $users->firstItem() +$i }}</td>
             <td>{{ $user['first_name'] }}</td>
             <td>{{ $user['email'] }}</td>
             <td>{{ $user['role'] }}</td>
@@ -55,6 +55,13 @@
                     @csrf
                     @method("DELETE")
                     <button type="submit" class="btn btn-outline-danger">Remove</button>
+
+
+                </form>
+                <form action="{{ route("users.edit", $user["id"]) }}" method="GET" class="d-inline">
+               
+                   
+                    <button type="submit" class="btn btn-outline-info">Update</button>
 
 
                 </form>

@@ -92,9 +92,17 @@ class UserController extends Controller
                     'role_id' => $request->role,
                     'password' => Hash::make($request->password)
                 ]);
-                dd($user);
+                // dd($user);
             }
 
+
+public  function edit($id){
+    $user = User::find($id);
+                $roles= Roles::all();
+
+    return view("admin.pages.users.update", compact("user", "roles"));
+// dd($user);
+}
 
 
 }
