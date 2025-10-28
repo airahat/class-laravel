@@ -17,18 +17,20 @@
 </thead>
 
 <tbody>
-    @foreach ($products as $i=> $product)
+    @foreach ($products as $i => $product)
     <tr>
-        <th>{{ $i +1 }}</th>
-        <th>{{ $product["title"] }}</th>
-        <th>{{ $product["description"] }}</th>
-        <th>{{ $product["category_id"] }}</th>
-        <th>{{ $product["price"] }}</th>
-        <th>{{ $product["photo"] }}</th>
-
+        <td>{{ $products->firstItem() +$i }}</td>
+        <td>{{ $product["title"] }}</td>
+        <td>{{ $product["description"] }}</td>
+        <td>{{ $product["category_id"] }}</td>
+        <td>{{ $product["price"] }}</td>
+        <td>{{ $product["photo"] }}</td>
     </tr>
+    @php
+    $sl++
+    @endphp
     @endforeach
-
+    
 </tbody>
 
 <tfoot>

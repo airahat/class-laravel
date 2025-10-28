@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Roles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\support\Facades\DB;
 use App\Models\User;
 
@@ -59,6 +62,38 @@ class UserController extends Controller
             return view('admin.pages.users.show', compact("user"));
             // return view('pages.about');
         }
+        public function destroy($id) {
+            $user = User::find($id);
+            // $user = User::where("user_id", $id)->first(); if something other that id
+            $user->delete();
+            // dd("Deleted");
+            return redirect()->route("users.index")->with("success", "User Deleted Successfully");
+        }
+        public function create() {
+
+            $roles= Roles::all();
+            // dd($roles);
+            return view("admin.pages.users.create", compact("roles"));
+        }
+        public function store(Request $request) {
+            $request->validate([
+                'first_name' => 'required|min:2|max:20',
+                'last_name' => ['required', 'min:2' ,'max:20'],
+                'email' => 'required|email',
+                'password' =>['required', 'min:6', 'confirmed']
+               
+            ]);
+
+                // dd($request->all());
+                $user = User::create([
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                    'role_id' => $request->role,
+                    'password' => Hash::make($request->password)
+                ]);
+                dd($user);
+            }
 
 
 

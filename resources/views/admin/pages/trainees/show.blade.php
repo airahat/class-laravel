@@ -1,4 +1,4 @@
-@extends("layout.nav")
+@extends("admin.layout.nav")
 @section("title", "Student Details")
 
 @section("content")

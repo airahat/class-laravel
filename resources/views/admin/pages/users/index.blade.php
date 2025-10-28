@@ -2,6 +2,27 @@
 @section('title', 'Users List')
 @section('content')
     <h2>Users List</h2>
+    
+    <div><a href="{{ route('users.create') }}" class="btn btn-outline-danger">Add new</a></div>
+    
+    
+    
+    
+    
+    @if(session("success"))
+    <div class="alert alert-success" role="alert">
+        {{ session("success") }}
+
+    </div>
+
+
+    @endif
+
+
+
+
+
+
 
     <table class="table table-striped">
         <thead>
@@ -27,7 +48,23 @@
 
                     View
 
-                </x-button></td>
+                </x-button>
+            
+            
+                <form action="{{ route("users.destroy", $user["id"]) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method("DELETE")
+                    <button type="submit" class="btn btn-outline-danger">Remove</button>
+
+
+                </form>
+            
+            
+            
+            
+            </td>
+
+
 
         </tr>
     @endforeach

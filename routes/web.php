@@ -42,8 +42,16 @@ Route::get('/trainees/{id}', [TraineeController::class, 'show'])->name("trainees
 
 Route::get('/roles', [RolesController::class, 'index'])->name("roles.index");
 Route::get('/roles/{id}', [RolesController::class, 'show'])->name("roles.show");
-Route::get('/users', [UserController::class, 'index']);
+
+
+
+
+
+Route::get("/users/create", [UserController::class, "create"])->name("users.create");
+Route::post("/users", [UserController::class, "store"])->name("users.store");
+Route::get('/users', [UserController::class, 'index'])->name("users.index");
 Route::get('/users/{id}', [UserController::class, 'show'])->name("users.show");
+Route::delete("/users/{id}", [UserController::class, "destroy"])->name("users.destroy");
 Route::get("/products", [ProductController::class, "index"]);
 
 // Route::get('/trainees/{id}/', function ( $id, ) {  

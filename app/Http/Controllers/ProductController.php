@@ -13,7 +13,8 @@ class ProductController extends Controller
         ->select("p.id", "p.title", "p.description", "p.price", "p.category_id", "p.photo")
         ->paginate(5);
         // dd($products);
-        return view("admin.pages.products.index", compact("products"));
+        $sl =($products->currentPage()-1)*$products->perPage()+1;
+        return view("admin.pages.products.index", compact("products", "sl"));
     }
     
 }
