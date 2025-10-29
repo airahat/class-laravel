@@ -2,25 +2,14 @@
 @section('title', 'Users List')
 @section('content')
     <h2>Users List</h2>
+<div><a href="{{ route('users.create') }}" class="btn btn-outline-danger">Add new</a></div>
     
-    <div><a href="{{ route('users.create') }}" class="btn btn-outline-danger">Add new</a></div>
-    
-    
-    
-    
-    
+       
     @if(session("success"))
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success mt-2" role="alert">
         {{ session("success") }}
-
     </div>
-
-
     @endif
-
-
-
-
 
 
 
@@ -58,9 +47,9 @@
 
 
                 </form>
-                <form action="{{ route("users.edit", $user["id"]) }}" method="GET" class="d-inline">
-               
-                   
+                <form action="{{ route("users.edit", $user["id"]) }}" method="POST" class="d-inline">
+                     @csrf
+                   <input type="hidden" name="page" value={{ request('page', 1) }}>
                     <button type="submit" class="btn btn-outline-info">Update</button>
 
 
