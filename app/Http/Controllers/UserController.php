@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::from("users as u")
-            ->select("u.id", "u.first_name", "u.email", "u.role_id", "r.name as role")
+            ->select("u.id", "u.first_name", "u.email", "u.role_id","u.photo", "r.name as role")
             ->join("roles as r", "u.role_id", "=", "r.id")
 
             ->orderBy("u.id", "desc")
@@ -55,7 +55,7 @@ class UserController extends Controller
     public function show($id)
     {
         // $user = User::find($id);
-        $user = User::select("u.id", "u.first_name", "u.email", "u.role_id", "r.name as role")
+        $user = User::select("u.id", "u.first_name", "u.email", "u.role_id", "u.photo", "r.name as role")
             ->from("users as u")
             ->join("roles as r", "u.role_id", "=", "r.id")
             ->where("u.id", $id)
@@ -81,20 +81,34 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'first_name' => 'required|min:2|max:20',
-            'last_name' => ['required', 'min:2', 'max:20'],
-            'email' => 'required|email',
-            'password' => ['required', 'min:6', 'confirmed']
+        $request->validate(
+            [
+                // 'first_name' => 'required|min:2|max:20',
+                // 'last_name' => ['required', 'min:2', 'max:20'],
+                // 'email' => 'required|email',
+                'photo' => ['mimes:jpg,png,jpeg', 'image', 'max:2048', 'dimensions:1/1,width=200,height=200'],
+                // 'password' => ['required', 'min:6', 'confirmed']
 
-        ]);
+            ],
+            [
+                'photo.mimes' => 'Profile image must be jpg or png ',
+                'photo.dimensions' => 'Image dimensions must be 200x200 ',
+            ]
+        );
 
-        // dd($request->all());
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo')->store('users', 'public');
+        } else {
+            $photo = null;
+
+        }
+
         User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'role_id' => $request->role,
+            'photo' => $photo,
             'password' => Hash::make($request->password)
         ]);
 
@@ -114,31 +128,31 @@ class UserController extends Controller
         // dd($page);
         return view("admin.pages.users.edit", compact("user", "roles", "page"));
     }
-public function update(Request $request, $id)
-{
+    public function update(Request $request, $id)
+    {
 
-    $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
 
-    $request->validate([
+        $request->validate([
             'first_name' => 'required|min:2|max:20',
             'last_name' => ['required', 'min:2', 'max:20'],
             'email' => 'required|email',
-         
-    ]);
 
-    $user->update([
-        'first_name'  => $request->first_name,
-        'last_name'  => $request->last_name,
-        'email' => $request->email,
-        'role_id'  => $request->role,
-  
-    ]);
+        ]);
+
+        $user->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'role_id' => $request->role,
+
+        ]);
 
 
-    return redirect()->route('users.index', ['page'=> $request->page])
-                     ->with('success', 'User updated successfully!');
-}
+        return redirect()->route('users.index', ['page' => $request->page])
+            ->with('success', 'User updated successfully!');
+    }
 
 
 

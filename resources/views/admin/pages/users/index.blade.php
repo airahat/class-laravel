@@ -29,6 +29,12 @@
     @foreach ($users as $i => $user)
         <tr>
             <td>{{ $users->firstItem() +$i }}</td>
+            <td>
+                @if($user['photo']==null)
+                    <img src="https://placehold.co/400" style="max-width: 80px" alt="null photo">
+                
+                @endif
+                <img src="storage/{{ $user['photo']}}" style="max-width: 80px" alt=""></td>
             <td>{{ $user['first_name'] }}</td>
             <td>{{ $user['email'] }}</td>
             <td>{{ $user['role'] }}</td>
